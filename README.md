@@ -1,43 +1,75 @@
 # Python System Monitor
 
-A modular Python-based Linux system monitoring tool that displays real-time system information such as CPU, memory, disk usage, hostname, IP address, uptime, and logged-in users. The application also generates warnings for high CPU utilization and records events in a log file.
+A beginner-friendly Linux system monitoring utility written in Python. It displays key system metrics such as CPU, memory, and disk usage, along with system information including hostname, IP address, boot time, and logged-in users. The application also generates warnings for high CPU usage and records monitoring information in a log file.
 
 ## Features
 
-* CPU usage monitoring
-* Memory (RAM) usage monitoring
-* Disk usage monitoring
-* Hostname and IP address display
-* System uptime reporting
-* Logged-in user listing
-* Configurable alerts for high CPU usage
-* Logging to `system.log`
+- CPU usage monitoring with high-usage warnings
+- RAM usage monitoring
+- Disk usage monitoring
+- Hostname and IP address display
+- System uptime (boot time) display
+- Logged-in user detection
+- Logging of monitoring information to `system.log`
 
 ## Project Structure
 
 ```text
 python-system-monitor/
-├── monitor.py
 ├── cpu.py
 ├── memory.py
 ├── disk.py
+├── system_info.py
+├── uptime.py
+├── users.py
 ├── logger.py
+├── monitor.py
 ├── requirements.txt
-└── README.md
+├── .gitignore
+├── README.md
+└── docs/
+    └── images/
 ```
 
-## Requirements
+## Prerequisites
 
-* Python 3.8 or later
-* Linux operating system
-* `psutil` Python package
+- Python 3.10 or later
+- Linux or WSL
+- `psutil` Python package
 
-## Getting Started
+## Installation
 
-1. Create and activate a Python virtual environment.
-2. Install the dependencies from `requirements.txt`.
-3. Run `monitor.py` to view system statistics.
+```bash
+git clone <your-repository-url>
+cd python-system-monitor
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Usage
+
+```bash
+python3 monitor.py
+```
+
+## Sample Output
+
+![CPU Module Output](docs/images/monitor-output.png)
+![CPU Module Output](docs/images/logfile-info-output.png)
+
+## Logging
+
+The application writes monitoring information and warnings to `system.log`. Log files and Python cache files are excluded from version control via `.gitignore`.
 
 ## Future Enhancements
 
-This project will be progressively extended with Git workflows, Azure DevOps CI/CD, Docker containerization, Kubernetes deployment, and execution on Azure Linux virtual machines.
+- Docker containerization
+- Azure DevOps CI/CD pipeline
+- Kubernetes deployment
+- Azure VM deployment
+
+## License
+
+MIT License
+
