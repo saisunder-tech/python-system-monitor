@@ -1,4 +1,5 @@
 # Import the monitoring functions from the modules we created.
+from datetime import datetime
 from cpu import get_cpu_usage
 from memory import get_memory_usage
 from disk import get_disk_usage
@@ -14,6 +15,10 @@ from logger import setup_logger
 if __name__ == "__main__":
     print("Collecting system information...\n")
 
+    current_time = datetime.now()
+    print(f"Timestamp       : {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print()
+    
     # Create and configure the logger.
     logger = setup_logger()
 
