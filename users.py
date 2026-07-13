@@ -22,4 +22,3 @@ if __name__ == "__main__":
             print(f"- {user}")
     else:
         print("No users are currently logged in.")
-        

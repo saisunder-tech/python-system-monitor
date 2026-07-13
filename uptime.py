@@ -20,5 +20,3 @@ if __name__ == "__main__":
     uptime = get_uptime()
 
     print(f"System boot time: {uptime}")
-
-    

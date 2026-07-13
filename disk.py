@@ -18,5 +18,3 @@ if __name__ == "__main__":
     disk_usage = get_disk_usage()
 
     print(f"Disk Usage: {disk_usage}%")
-
-    

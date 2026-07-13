@@ -64,7 +64,3 @@ if __name__ == "__main__":
 
     print(f"Logged-in Users : {users_text}")
     logger.info(f"Logged-in Users: {users_text}")
-
-    
-
-    

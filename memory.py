@@ -17,5 +17,3 @@ if __name__ == "__main__":
     memory_usage = get_memory_usage()
 
     print(f"Memory Usage: {memory_usage}%")
-
-    

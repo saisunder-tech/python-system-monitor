@@ -1,5 +1,6 @@
 # Import the psutil library.
-# It provides functions to access system information such as CPU, memory, and disk usage.
+# It provides functions to access system information such as CPU
+#  memory, and disk usage.
 import psutil
 
 
@@ -17,4 +18,3 @@ def get_cpu_usage():
 if __name__ == "__main__":
     cpu_usage = get_cpu_usage()
     print(f"CPU Usage: {cpu_usage}%")
-    

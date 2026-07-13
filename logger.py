@@ -24,5 +24,3 @@ if __name__ == "__main__":
     logger.info("Logger initialized successfully.")
 
     print("A test message has been written to system.log")
-
-    

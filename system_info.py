@@ -27,5 +27,3 @@ if __name__ == "__main__":
 
     print(f"Hostname  : {hostname}")
     print(f"IP Address: {ip_address}")
-
-    
