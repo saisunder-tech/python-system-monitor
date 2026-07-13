@@ -18,7 +18,7 @@ if __name__ == "__main__":
     current_time = datetime.now()
     print(f"Timestamp       : {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print()
-    
+
     # Create and configure the logger.
     logger = setup_logger()
 
