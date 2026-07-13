@@ -28,4 +28,5 @@ jobs:
         run: python -m py_compile *.py
 
       - name: Run flake8
-        run: flake8.
+        run: flake8 .
+
