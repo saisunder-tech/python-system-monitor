@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: python-monitor
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: python-monitor
+
+  template:
+    metadata:
+      labels:
+        app: python-monitor
+
+    spec:
+      containers:
+      - name: python-monitor
+        image: saisundertech/python-system-monitor:latest
+        imagePullPolicy: Always
