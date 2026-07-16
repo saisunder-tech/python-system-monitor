@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: python-monitor-service
+
+spec:
+  selector:
+    app: python-monitor
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+  type: ClusterIP
