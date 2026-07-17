@@ -1,21 +1,47 @@
-# Python System Monitor
+# 🖥️ Python System Monitor
 
-A beginner-friendly Linux system monitoring utility written in Python. It displays key system metrics such as CPU, memory, and disk usage, along with system information including hostname, IP address, boot time, and logged-in users. The application also generates warnings for high CPU usage and records monitoring information in a log file.
+A modular Python-based system monitoring application that displays real-time system information including CPU, memory, disk usage, hostname, IP address, system boot time, and logged-in users. The project is containerized using Docker and includes automated CI with GitHub Actions.
 
-## Features
+---
 
-- CPU usage monitoring with high-usage warnings
-- RAM usage monitoring
-- Disk usage monitoring
-- Hostname and IP address display
-- System uptime (boot time) display
-- Logged-in user detection
-- Logging of monitoring information to `system.log`
+## 📌 Features
 
-## Project Structure
+- 📊 Monitor CPU usage
+- 💾 Monitor Memory usage
+- 💽 Monitor Disk usage
+- 🖥️ Display Hostname
+- 🌐 Display IP Address
+- ⏱️ Display System Boot Time (Uptime)
+- 👥 Display Logged-in Users
+- ⚠️ Configurable CPU usage threshold warning
+- ⚙️ Configurable monitoring interval using `.env`
+- 📝 Logging to `system.log`
+- 🛑 Graceful shutdown using `Ctrl + C`
+- 🛡️ Exception handling for improved reliability
+- 🐳 Docker container support
+- 🔄 GitHub Actions CI pipeline
+
+---
+
+## 🛠️ Technologies Used
+
+- Python 3
+- Linux (Ubuntu / WSL)
+- Docker
+- Git
+- GitHub
+- GitHub Actions
+- python-dotenv
+- psutil
+
+---
+
+## 📂 Project Structure
 
 ```text
 python-system-monitor/
+│
+├── monitor.py
 ├── cpu.py
 ├── memory.py
 ├── disk.py
@@ -23,53 +49,161 @@ python-system-monitor/
 ├── uptime.py
 ├── users.py
 ├── logger.py
-├── monitor.py
 ├── requirements.txt
+├── Dockerfile
+├── .env
 ├── .gitignore
 ├── README.md
-└── docs/
-    └── images/
+├── system.log
+│
+├── .github/
+│   └── workflows/
+│       └── python-ci.yml
+│
+└── k8s/
+    ├── deployment.yaml
+    └── service.yaml
 ```
+> **Note:** Kubernetes deployment manifests are included in this repository. Due to local resource limitations on the development machine, the Kubernetes deployment could not be fully demonstrated, but the manifests are prepared for deployment in a Kubernetes cluster.
 
-## Prerequisites
+---
 
-- Python 3.10 or later
-- Linux or WSL
-- `psutil` Python package
+## ⚙️ Installation
 
-## Installation
+Clone the repository:
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/saisunder-tech/python-system-monitor.git
+```
+
+Navigate into the project:
+
+```bash
 cd python-system-monitor
+```
+
+Create a virtual environment:
+
+```bash
 python3 -m venv .venv
+```
+
+Activate it:
+
+Linux / WSL
+
+```bash
 source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+---
 
-```bash
-python3 monitor.py
+## ⚙️ Configuration
+
+Create a `.env` file in the project root.
+
+Example:
+
+```env
+CPU_THRESHOLD=80
+MONITOR_INTERVAL=10
+LOG_LEVEL=INFO
+LOG_FILE=system.log
 ```
 
-## Sample Output
+---
 
-![CPU Module Output](docs/images/monitor-output.png)
-![CPU Module Output](docs/images/logfile-info-output.png)
+## ▶️ Run the Application
 
-## Logging
+```bash
+python monitor.py
+```
 
-The application writes monitoring information and warnings to `system.log`. Log files and Python cache files are excluded from version control via `.gitignore`.
+---
 
-## Future Enhancements
+## 🐳 Run Using Docker
 
-- Docker containerization
-- Azure DevOps CI/CD pipeline
-- Kubernetes deployment
-- Azure VM deployment
+Build the Docker image:
 
-## License
+```bash
+docker build -t python-system-monitor .
+```
 
-MIT License
+Run the container:
 
+```bash
+docker run --rm python-system-monitor
+```
+
+---
+
+## 🔄 GitHub Actions
+
+A GitHub Actions workflow automatically:
+
+- Installs dependencies
+- Performs Python syntax validation
+- Executes CI checks on every push and pull request
+
+Workflow location:
+
+```text
+.github/workflows/python-ci.yml
+```
+
+---
+
+## 📄 Logging
+
+Application logs are written to:
+
+```text
+system.log
+```
+
+The log file records:
+
+- CPU Usage
+- Memory Usage
+- Disk Usage
+- Hostname
+- IP Address
+- Boot Time
+- Logged-in Users
+- Warning messages
+- Unexpected exceptions
+- Application shutdown events
+
+---
+
+## 🚀 Future Improvements
+
+- Email alerts for high CPU usage
+- Slack / Microsoft Teams notifications
+- Web dashboard using Flask
+- REST API for monitoring data
+- Kubernetes deployment validation
+- Prometheus metrics integration
+- Grafana dashboard integration
+
+---
+
+## 👨‍💻 Author
+
+**Sai Sunder**
+
+GitHub:
+
+https://github.com/saisunder-tech
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
