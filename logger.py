@@ -1,21 +1,32 @@
 # Import Python's built-in logging module.
 import logging
+import os
+
+# Load variables from .env
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def setup_logger():
     """
-    Create and configure a logger that writes messages to system.log.
+    Create and configure a logger that writes messages
+    based on values stored in the .env file.
     """
+
+    log_file = os.getenv("LOG_FILE", "system.log")
+    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+
     logging.basicConfig(
-        filename="system.log",      # Name of the log file.
-        level=logging.INFO,         # Record INFO messages and above.
-        format="%(asctime)s - %(levelname)s - %(message)s"
+        filename=log_file,
+        level=getattr(logging, log_level, logging.INFO),
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        force=True
     )
 
     return logging.getLogger(__name__)
 
 
-# This block runs only when logger.py is executed directly.
 if __name__ == "__main__":
     print("Configuring the logger...")
 
@@ -23,4 +34,4 @@ if __name__ == "__main__":
 
     logger.info("Logger initialized successfully.")
 
-    print("A test message has been written to system.log")
+    print("A test message has been written.")

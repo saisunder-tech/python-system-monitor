@@ -1,6 +1,10 @@
 # Import required modules
+import os
 import time
 from datetime import datetime
+
+# Load environment variables from .env
+from dotenv import load_dotenv
 
 # Import monitoring functions
 from cpu import get_cpu_usage
@@ -13,9 +17,21 @@ from users import get_logged_in_users
 # Import logger setup function
 from logger import setup_logger
 
+# Load variables from .env
+load_dotenv()
 
-# Function to collect and display system information
+# Read configuration values
+CPU_THRESHOLD = int(os.getenv("CPU_THRESHOLD", 80))
+MONITOR_INTERVAL = int(os.getenv("MONITOR_INTERVAL", 10))
+
+
 def monitor_system():
+    """
+    Collect and display system information.
+    """
+
+    # Create logger
+    logger = setup_logger()
 
     print("\n==========================================")
     print("Collecting system information...\n")
@@ -24,17 +40,17 @@ def monitor_system():
     print(f"Timestamp       : {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print()
 
-    # Create logger
-    logger = setup_logger()
-
     # CPU Usage
     cpu = get_cpu_usage()
     print(f"CPU Usage       : {cpu}%")
     logger.info(f"CPU Usage: {cpu}%")
 
-    if cpu > 80:
-        print("WARNING !! CPU usage is above 80%")
-        logger.warning("CPU usage is above 80%")
+    if cpu > CPU_THRESHOLD:
+        warning_message = (
+            f"WARNING !! CPU usage is above {CPU_THRESHOLD}%"
+        )
+        print(warning_message)
+        logger.warning(warning_message)
 
     # Memory Usage
     memory = get_memory_usage()
@@ -46,14 +62,14 @@ def monitor_system():
     print(f"Disk Usage      : {disk}%")
     logger.info(f"Disk Usage: {disk}%")
 
-    # Hostname and IP Address
+    # Hostname
     hostname = get_hostname()
-    ip_address = get_ip_address()
-
     print(f"Hostname        : {hostname}")
-    print(f"IP Address      : {ip_address}")
-
     logger.info(f"Hostname: {hostname}")
+
+    # IP Address
+    ip_address = get_ip_address()
+    print(f"IP Address      : {ip_address}")
     logger.info(f"IP Address: {ip_address}")
 
     # System Boot Time
@@ -73,13 +89,31 @@ def monitor_system():
     logger.info(f"Logged-in Users: {users_text}")
 
     print("\nMonitoring completed.")
-    print("Waiting 10 seconds before the next check...")
+    print(f"Waiting {MONITOR_INTERVAL} seconds before the next check...")
     print("==========================================\n")
 
 
-# Main program
+# Main Program
 if __name__ == "__main__":
 
-    while True:
-        monitor_system()
-        time.sleep(10)
+    logger = setup_logger()
+
+    try:
+        while True:
+
+            try:
+                monitor_system()
+
+            except Exception as error:
+                print("\nERROR: Unable to collect system information.")
+                print("Continuing monitoring...\n")
+
+                logger.exception(f"Unexpected error: {error}")
+
+            time.sleep(MONITOR_INTERVAL)
+
+    except KeyboardInterrupt:
+        print("\nStopping Python System Monitor...")
+        print("Goodbye!")
+
+        logger.info("Application stopped by user.")
