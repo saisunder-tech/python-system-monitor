@@ -64,8 +64,43 @@ python-system-monitor/
     ├── deployment.yaml
     └── service.yaml
 ```
-> **Note:** Kubernetes deployment manifests are included in this repository. Due to local resource limitations on the development machine, the Kubernetes deployment could not be fully demonstrated, but the manifests are prepared for deployment in a Kubernetes cluster.
+> **Note:** Kubernetes deployment manifests are included in this repository. The application has been successfully deployed and validated on a Kubernetes cluster using Killercoda.
 
+---
+
+# 📸 Project Demonstration
+
+## GitHub Actions
+
+The CI pipeline automatically installs dependencies, validates the code, builds the Docker image, and pushes it to Docker Hub.
+
+![GitHub Actions](docs/images/github-actions-success.png)
+
+---
+
+## Docker Hub
+
+The latest Docker image is published to Docker Hub and is used for containerized deployments.
+
+![Docker Hub](docs/images/dockerhub.png)
+
+---
+
+## Kubernetes Deployment
+
+The application is deployed as a Kubernetes Deployment and the Pod is successfully running.
+
+![Kubernetes Pods](docs/images/kubernetes-pods.png)
+
+---
+
+## Application Logs
+
+The application runs successfully inside a Kubernetes Pod and continuously monitors the system every configured interval.
+
+![Kubernetes Logs](docs/images/kubernetes-logs.png)
+
+---
 ---
 
 ## ⚙️ Installation
